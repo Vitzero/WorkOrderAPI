@@ -4,7 +4,7 @@ using WorkOrderAPI.Models;
 
 namespace WorkOrderAPI.Data.ConfigurationData
 {
-    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+    public class CustomerTypeConfiguration : IEntityTypeConfiguration<Customer>
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
@@ -33,6 +33,18 @@ namespace WorkOrderAPI.Data.ConfigurationData
                 .Property(x => x.Email)
                 .HasColumnType("varchar(40)")
                 .HasColumnName("Email")
+                .IsRequired();
+
+            builder
+                .Property(x=>x.AddressId)
+                .HasColumnName("AddressId")
+                .HasColumnType ("integer")
+                .IsRequired ();
+
+            builder
+                .HasOne(x => x.Address)
+                .WithOne()
+                .HasForeignKey<Customer>(x => x.AddressId) // pai Cliente contem o children (endereco)
                 .IsRequired();
 
         }

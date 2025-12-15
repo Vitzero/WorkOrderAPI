@@ -16,8 +16,9 @@ namespace WorkOrderAPI.Models
         [Required(ErrorMessage = "O campo 'Telefone' é obrigatório.")]
         public string PhoneNumber { get; set; }
 
-        [Required]
         public virtual Address Address { get; set; }
+
+        public int AddressId { get; set; }
 
 
     }
